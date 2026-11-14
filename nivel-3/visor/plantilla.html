@@ -1,0 +1,276 @@
+<title>Siracusa Nivel 3</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Dispatch board: map fills the left, route manifests stack on the right, clock scrubber under the map */
+:root {
+  --bg: #eef0ec; --panel: #f8f9f6; --ink: #1f2522; --muted: #66706a; --line: #d4d9d3;
+  --street: #c3c9c2; --street-major: #a5aea6; --street-svc: #d7dbd5; --blocked: #c4574a;
+  --v1: #2a62c9; --v2: #d0711b; --v3: #8a3fb0; --depot: #1f2522; --map: #e6e9e3;
+  --f-display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Barlow", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141816; --panel: #1b201d; --ink: #e5e9e4; --muted: #94a098; --line: #2e3530;
+  --street: #3a423d; --street-major: #4f5952; --street-svc: #2d3430; --blocked: #e0766a;
+  --v1: #6a9cf5; --v2: #f0a050; --v3: #c784ea; --depot: #e5e9e4; --map: #181c1a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141816; --panel: #1b201d; --ink: #e5e9e4; --muted: #94a098; --line: #2e3530;
+  --street: #3a423d; --street-major: #4f5952; --street-svc: #2d3430; --blocked: #e0766a;
+  --v1: #6a9cf5; --v2: #f0a050; --v3: #c784ea; --depot: #e5e9e4; --map: #181c1a; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 16px 24px }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; margin-bottom: 12px }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: 26px; margin: 0; letter-spacing: .01em }
+.sub { color: var(--muted) }
+.kpis { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-left: auto; font-family: var(--f-mono); font-size: 13px; font-variant-numeric: tabular-nums }
+.kpis b { font-weight: 500 } .kpis span { color: var(--muted) }
+.wrap { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 14px; align-items: start }
+@media (max-width: 900px) { .wrap { grid-template-columns: minmax(0, 1fr) } }
+.mapcard { background: var(--map); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; position: relative }
+svg#map { display: block; width: 100%; height: min(72vh, 760px); min-height: 360px; touch-action: none; cursor: grab }
+svg#map.drag { cursor: grabbing }
+.legend { position: absolute; left: 10px; top: 10px; display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted);
+  background: color-mix(in srgb, var(--panel) 88%, transparent); padding: 8px 10px; border-radius: 4px; border: 1px solid var(--line) }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid; vertical-align: middle; margin-right: 6px }
+.zoom { position: absolute; right: 10px; top: 10px; display: flex; flex-direction: column; gap: 4px }
+button { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 4px; cursor: pointer }
+button:hover { border-color: var(--muted) } button:focus-visible, input:focus-visible { outline: 2px solid var(--v1); outline-offset: 2px }
+.zoom button { width: 30px; height: 30px; font-size: 16px }
+.clock { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-top: 1px solid var(--line); background: var(--panel) }
+.clock button { padding: 5px 12px; min-width: 64px }
+.clock input { flex: 1; min-width: 0; accent-color: var(--ink) }
+.clock output { font-family: var(--f-mono); font-size: 15px; font-variant-numeric: tabular-nums; min-width: 72px; text-align: right }
+aside { display: flex; flex-direction: column; gap: 10px; min-width: 0 }
+.veh { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden }
+.vh { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 4px 10px; padding: 10px 12px; cursor: pointer; user-select: none }
+.vh .sw { width: 12px; height: 12px; border-radius: 3px; background: var(--c) }
+.vh h2 { font-family: var(--f-display); font-size: 17px; font-weight: 600; margin: 0 }
+.vh h2 small { font-family: var(--f-body); font-weight: 400; color: var(--muted); font-size: 13px; margin-left: 4px }
+.vh .meta { grid-column: 2 / 4; font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; display: flex; flex-wrap: wrap; gap: 2px 12px }
+.vh label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px }
+.veh.off .vh h2, .veh.off .sw { opacity: .4 }
+.bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; width: 54px; display: inline-block; vertical-align: middle; margin-left: 4px }
+.bar > div { height: 100%; background: var(--c) }
+ol { list-style: none; margin: 0; padding: 0; max-height: 260px; overflow-y: auto; border-top: 1px solid var(--line) }
+ol li { display: grid; grid-template-columns: 22px 62px 1fr 74px; gap: 8px; align-items: center; padding: 4px 12px; font-size: 12.5px; cursor: pointer; font-variant-numeric: tabular-nums }
+ol li:hover, ol li.hl { background: color-mix(in srgb, var(--c) 14%, transparent) }
+ol li.done { color: var(--muted) }
+ol li.now { box-shadow: inset 3px 0 0 var(--c) }
+ol .n { font-family: var(--f-mono); font-size: 11px; color: var(--muted); text-align: right }
+ol .id { font-family: var(--f-mono); font-size: 11.5px }
+ol .ad { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0 }
+.fr { position: relative; height: 10px; background: color-mix(in srgb, var(--c) 18%, transparent); border-radius: 2px }
+.fr > div { position: absolute; top: 0; bottom: 0; background: var(--c); border-radius: 2px }
+.tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px;
+  font-size: 12px; line-height: 1.5; box-shadow: 0 4px 14px rgb(0 0 0 / .14); max-width: 260px; z-index: 5 }
+.tip b { font-family: var(--f-mono); font-weight: 500 } .tip .k { color: var(--muted) }
+.tip .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums }
+.note { color: var(--muted); font-size: 12px; margin-top: 10px; max-width: 70ch }
+.stop-label { font-family: var(--f-mono); font-size: 9px; fill: var(--panel); pointer-events: none; text-anchor: middle; dominant-baseline: central }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+</style>
+
+<header>
+  <h1>Siracusa · Nivel 3</h1>
+  <div class="sub" id="fecha"></div>
+  <div class="kpis" id="kpis"></div>
+</header>
+<div class="wrap">
+  <div class="mapcard" id="mapcard">
+    <svg id="map" role="img" aria-label="Mapa de calles de Siracusa con las rutas de reparto"></svg>
+    <div class="legend">
+      <div><i style="border-color:var(--street-major)"></i>tertiary · 32 km/h</div>
+      <div><i style="border-color:var(--street)"></i>residential · 24 km/h</div>
+      <div><i style="border-color:var(--street-svc);border-top-style:dashed"></i>service · 15 km/h</div>
+      <div><i style="border-color:var(--blocked);border-top-style:dotted"></i>access=no</div>
+    </div>
+    <div class="zoom"><button id="zin" aria-label="Acercar">+</button><button id="zout" aria-label="Alejar">−</button><button id="zfit" aria-label="Encuadrar todo">⤢</button></div>
+    <div class="clock">
+      <button id="play">▶ Play</button>
+      <input type="range" id="t" min="0" max="1" step="1" aria-label="Hora">
+      <output id="tout">--:--:--</output>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+  </div>
+  <aside id="side"></aside>
+</div>
+<p class="note">Cada tramo sigue el camino de menor distancia dirigida sobre el plano recibido (empate por menor tiempo), con los tiempos por arista de operacion.json. Arrastrá para mover, rueda o botones para zoom. La barra de cada parada muestra la franja del cliente y, en color pleno, la descarga.</p>
+
+<script>
+const D = /*DATA*/null;
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const hms = s => [s / 3600 | 0, (s % 3600) / 60 | 0, s % 60].map(x => String(x).padStart(2, "0")).join(":");
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e };
+const P = id => { const p = D.nodes[id]; return [p[0], -p[1]] };
+const VC = ["var(--v1)", "var(--v2)", "var(--v3)"];
+
+$("fecha").textContent = `Jornada ${D.fecha} · ${D.rutas.reduce((a, r) => a + r.stops.length, 0)} pedidos · ${D.rutas.length} camionetas`;
+const totM = D.rutas.reduce((a, r) => a + r.m, 0);
+$("kpis").innerHTML = `<div><span>distancia</span> <b>${(totM / 1000).toFixed(3)} km</b></div>` +
+  `<div><span>primera salida</span> <b>${hms(Math.min(...D.rutas.map(r => r.salida)))}</b></div>` +
+  `<div><span>último regreso</span> <b>${hms(Math.max(...D.rutas.map(r => r.regreso)))}</b></div>`;
+
+const svg = $("map");
+let xs = [], ys = [];
+for (const k in D.nodes) { const [x, y] = P(k); xs.push(x); ys.push(y) }
+const pad = 120, B = { x: Math.min(...xs) - pad, y: Math.min(...ys) - pad, w: Math.max(...xs) - Math.min(...xs) + 2 * pad, h: Math.max(...ys) - Math.min(...ys) + 2 * pad };
+let vb = { ...B };
+const setVB = () => svg.setAttribute("viewBox", `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+const fit = () => {
+  const r = svg.getBoundingClientRect(), ar = r.width / r.height, bar = B.w / B.h;
+  vb = bar > ar ? { x: B.x, w: B.w, h: B.w / ar, y: B.y - (B.w / ar - B.h) / 2 } : { y: B.y, h: B.h, w: B.h * ar, x: B.x - (B.h * ar - B.w) / 2 };
+  setVB(); scaleMarks();
+};
+
+const gStreets = el("g", {}, svg), gRoutes = el("g", {}, svg), gStops = el("g", {}, svg), gVeh = el("g", {}, svg);
+const sty = [["var(--street)", 6, ""], ["var(--street-major)", 9, ""], ["var(--street-svc)", 4, "10 8"]];
+let dStr = ["", "", ""], dBlk = "";
+for (const [a, b, hw, ow, blk] of D.ways) {
+  const [x1, y1] = P(a), [x2, y2] = P(b), seg = `M${x1} ${y1}L${x2} ${y2}`;
+  if (blk) dBlk += seg; else dStr[hw] += seg;
+}
+dStr.forEach((d, i) => el("path", { d, fill: "none", stroke: sty[i][0], "stroke-width": sty[i][1], "stroke-dasharray": sty[i][2], "stroke-linecap": "round" }, gStreets));
+el("path", { d: dBlk, fill: "none", stroke: "var(--blocked)", "stroke-width": 5, "stroke-dasharray": "4 10", "stroke-linecap": "round" }, gStreets);
+
+const routeEls = [], stopEls = [], vehEls = [];
+D.rutas.forEach((r, vi) => {
+  const pts = []; let last = null;
+  for (const [, n] of r.track) if (n !== last) { pts.push(P(n).join(",")); last = n }
+  const g = el("g", {}, gRoutes);
+  el("polyline", { points: pts.join(" "), fill: "none", stroke: VC[vi], "stroke-width": 14, "stroke-opacity": .18, "stroke-linejoin": "round" }, g);
+  el("polyline", { points: pts.join(" "), fill: "none", stroke: VC[vi], "stroke-width": 4.5, "stroke-linejoin": "round", "stroke-linecap": "round" }, g);
+  routeEls.push(g);
+  const gs = el("g", {}, gStops), list = [];
+  r.stops.forEach((s, i) => {
+    const [x, y] = P(s.nodo), c = el("g", { transform: `translate(${x} ${y})`, class: "stop", style: "cursor:pointer" }, gs);
+    el("circle", { r: 20, fill: VC[vi], stroke: "var(--panel)", "stroke-width": 4, class: "dot" }, c);
+    const t = el("text", { class: "stop-label" }, c); t.textContent = i + 1;
+    c.addEventListener("pointerenter", e => showTip(vi, i, e)); c.addEventListener("pointermove", e => moveTip(e));
+    c.addEventListener("pointerleave", hideTip);
+    list.push(c);
+  });
+  stopEls.push({ g: gs, list });
+  const m = el("g", {}, gVeh);
+  el("circle", { r: 30, fill: "var(--panel)", stroke: VC[vi], "stroke-width": 7 }, m);
+  const lt = el("text", { class: "stop-label", style: `fill:${VC[vi]};font-size:22px;font-weight:600` }, m); lt.textContent = r.v.slice(1);
+  vehEls.push(m);
+});
+const [dx, dy] = P(D.dep);
+const depG = el("g", { transform: `translate(${dx} ${dy})` }, gStops);
+el("rect", { x: -26, y: -26, width: 52, height: 52, rx: 4, fill: "var(--depot)", stroke: "var(--panel)", "stroke-width": 5 }, depG);
+const dt = el("text", { class: "stop-label", style: "font-size:24px;font-weight:600" }, depG); dt.textContent = "D";
+el("title", {}, depG).textContent = `Depósito · nodo ${D.dep}`;
+
+function scaleMarks() {
+  const k = Math.max(0.35, Math.min(2.2, vb.w / B.w * 1.4));
+  [...gStops.querySelectorAll(":scope > g > g"), depG].forEach(g => {
+    const tr = g.getAttribute("transform").replace(/ scale\([^)]*\)/, ""); g.setAttribute("transform", `${tr} scale(${k})`);
+  });
+  vehEls.forEach(g => g.dataset.k = k);
+  draw(+$("t").value);
+}
+
+const tip = $("tip"), card = $("mapcard");
+function showTip(vi, i, e) {
+  const r = D.rutas[vi], s = r.stops[i], wait = s.ini - s.llega;
+  tip.innerHTML = `<b>${s.id}</b> · ${s.cliente} · <span class="k">${r.v} parada ${i + 1}</span><br>${s.dir} <span class="k">(nodo ${s.nodo})</span><br>` +
+    `<span class="k">franja</span> <span class="mono">${hms(s.fd)}–${hms(s.fh)}</span><br>` +
+    `<span class="k">llega</span> <span class="mono">${hms(s.llega)}</span>${wait > 0 ? ` <span class="k">espera ${wait}s</span>` : ""}<br>` +
+    `<span class="k">descarga</span> <span class="mono">${hms(s.ini)}–${hms(s.fin)}</span><br>` +
+    `<span class="k">carga</span> <span class="mono">${s.kg} kg · ${s.m3} m³</span><br><span class="k">${s.items.map(([p, q]) => `${q}× ${p}`).join(", ")}</span>`;
+  tip.hidden = false; moveTip(e); highlight(vi, i, true);
+}
+function moveTip(e) {
+  const r = card.getBoundingClientRect(); let x = e.clientX - r.left + 14, y = e.clientY - r.top + 14;
+  if (x + 270 > r.width) x -= 290; if (y + 170 > r.height) y -= 190; tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+function hideTip() { tip.hidden = true; document.querySelectorAll("li.hl").forEach(l => l.classList.remove("hl")); stopEls.forEach(s => s.list.forEach(c => c.querySelector(".dot").setAttribute("stroke", "var(--panel)"))) }
+function highlight(vi, i, on) {
+  const li = document.querySelector(`li[data-v="${vi}"][data-i="${i}"]`); li && li.classList.toggle("hl", on);
+  stopEls[vi].list[i].querySelector(".dot").setAttribute("stroke", on ? "var(--ink)" : "var(--panel)");
+}
+
+const side = $("side"), visible = D.rutas.map(() => true);
+D.rutas.forEach((r, vi) => {
+  const v = document.createElement("section"); v.className = "veh"; v.style.setProperty("--c", VC[vi]);
+  v.innerHTML = `<div class="vh"><div class="sw"></div><h2>${r.v}<small>${r.chofer}</small></h2>
+    <label><input type="checkbox" id="show-${r.v}" checked> ver</label>
+    <div class="meta"><span>${r.stops.length} pedidos</span><span>${(r.m / 1000).toFixed(3)} km</span><span>${hms(r.salida)}→${hms(r.regreso)}</span>
+    <span>${r.kg}/${r.capkg} kg<span class="bar"><div style="width:${r.kg / r.capkg * 100}%"></div></span></span>
+    <span>${r.m3}/${r.capm3} m³<span class="bar"><div style="width:${r.m3 / r.capm3 * 100}%"></div></span></span></div></div><ol></ol>`;
+  const ol = v.querySelector("ol"), span = [Math.min(...r.stops.map(s => s.fd)), Math.max(...r.stops.map(s => s.fh))];
+  r.stops.forEach((s, i) => {
+    const li = document.createElement("li"); li.dataset.v = vi; li.dataset.i = i;
+    const L = x => ((x - s.fd) / (s.fh - s.fd) * 100).toFixed(1);
+    li.innerHTML = `<span class="n">${i + 1}</span><span class="id">${s.id}</span><span class="ad">${hms(s.ini).slice(0, 5)} · ${s.dir}</span>` +
+      `<div class="fr" title="franja ${hms(s.fd)}–${hms(s.fh)}, descarga ${hms(s.ini)}–${hms(s.fin)}"><div style="left:${L(s.ini)}%;width:${L(s.fin) - L(s.ini)}%"></div></div>`;
+    li.addEventListener("mouseenter", () => highlight(vi, i, true));
+    li.addEventListener("mouseleave", () => highlight(vi, i, false));
+    li.addEventListener("click", () => { setT(s.ini); centerOn(s.nodo) });
+    ol.appendChild(li);
+  });
+  v.querySelector("input").addEventListener("change", e => {
+    visible[vi] = e.target.checked; v.classList.toggle("off", !visible[vi]);
+    [routeEls[vi], stopEls[vi].g, vehEls[vi]].forEach(g => g.style.display = visible[vi] ? "" : "none");
+  });
+  side.appendChild(v);
+});
+
+const tMin = Math.min(...D.rutas.map(r => r.salida)) - 120, tMax = Math.max(...D.rutas.map(r => r.regreso)) + 120;
+const tIn = $("t"); tIn.min = tMin; tIn.max = tMax;
+function posAt(r, t) {
+  const tr = r.track;
+  if (t <= tr[0][0]) return { p: P(tr[0][1]), state: "depot" };
+  if (t >= tr[tr.length - 1][0]) return { p: P(tr[tr.length - 1][1]), state: "depot" };
+  let lo = 0, hi = tr.length - 1;
+  while (hi - lo > 1) { const m = (lo + hi) >> 1; if (tr[m][0] <= t) lo = m; else hi = m }
+  const [t0, n0] = tr[lo], [t1, n1] = tr[hi], a = P(n0), b = P(n1), f = t1 > t0 ? (t - t0) / (t1 - t0) : 0;
+  return { p: [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f] };
+}
+function draw(t) {
+  $("tout").textContent = hms(t);
+  D.rutas.forEach((r, vi) => {
+    const { p } = posAt(r, t), k = vehEls[vi].dataset.k || 1;
+    vehEls[vi].setAttribute("transform", `translate(${p[0]} ${p[1]}) scale(${k})`);
+    r.stops.forEach((s, i) => {
+      const li = document.querySelector(`li[data-v="${vi}"][data-i="${i}"]`);
+      li.classList.toggle("done", t >= s.fin); li.classList.toggle("now", t >= s.llega && t < s.fin);
+      stopEls[vi].list[i].style.opacity = t >= s.fin ? .45 : 1;
+    });
+  });
+}
+function setT(t) { tIn.value = t; draw(+tIn.value) }
+tIn.addEventListener("input", () => draw(+tIn.value));
+let playing = null;
+$("play").addEventListener("click", () => {
+  if (playing) { cancelAnimationFrame(playing); playing = null; $("play").textContent = "▶ Play"; return }
+  if (+tIn.value >= tMax) tIn.value = tMin;
+  $("play").textContent = "❚❚ Pausa"; let last = performance.now();
+  const step = now => { const t = Math.min(tMax, +tIn.value + (now - last) / 1000 * 240); last = now; setT(t);
+    if (t >= tMax) { playing = null; $("play").textContent = "▶ Play"; return } playing = requestAnimationFrame(step) };
+  playing = requestAnimationFrame(step);
+});
+
+function zoom(f, cx, cy) {
+  cx ??= vb.x + vb.w / 2; cy ??= vb.y + vb.h / 2;
+  const nw = Math.min(B.w * 3, Math.max(300, vb.w * f)), k = nw / vb.w;
+  vb = { x: cx - (cx - vb.x) * k, y: cy - (cy - vb.y) * k, w: nw, h: vb.h * k }; setVB(); scaleMarks();
+}
+function centerOn(n) { const [x, y] = P(n); const w = Math.min(vb.w, B.w / 3), h = vb.h * w / vb.w; vb = { x: x - w / 2, y: y - h / 2, w, h }; setVB(); scaleMarks() }
+const toSvg = e => { const r = svg.getBoundingClientRect(); return [vb.x + (e.clientX - r.left) / r.width * vb.w, vb.y + (e.clientY - r.top) / r.height * vb.h] };
+svg.addEventListener("wheel", e => { e.preventDefault(); const [x, y] = toSvg(e); zoom(e.deltaY > 0 ? 1.15 : 1 / 1.15, x, y) }, { passive: false });
+let drag = null;
+svg.addEventListener("pointerdown", e => { if (e.target.closest(".stop")) return; drag = { x: e.clientX, y: e.clientY, vb: { ...vb } }; svg.setPointerCapture(e.pointerId); svg.classList.add("drag") });
+svg.addEventListener("pointermove", e => { if (!drag) return; const r = svg.getBoundingClientRect();
+  vb.x = drag.vb.x - (e.clientX - drag.x) / r.width * vb.w; vb.y = drag.vb.y - (e.clientY - drag.y) / r.height * vb.h; setVB() });
+svg.addEventListener("pointerup", () => { drag = null; svg.classList.remove("drag") });
+$("zin").onclick = () => zoom(1 / 1.4); $("zout").onclick = () => zoom(1.4); $("zfit").onclick = fit;
+addEventListener("resize", fit);
+const firstStart = Math.min(...D.rutas.map(r => r.stops[0]?.ini ?? r.salida));
+tIn.value = firstStart + 1800;
+fit();
+</script>

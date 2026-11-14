@@ -28,6 +28,8 @@ python3 nivel-3/codigo/validar.py
 | `resolver.py` | Ruteo con OR-Tools y escritura de `rutas.json` |
 | `validar.py` | Revisa `rutas.json` contra todas las condiciones |
 
+El visor de rutas sobre el plano está en [`../visor/`](../visor/).
+
 ## Criterios
 
 - Las calles mal escritas o mal transcriptas se resuelven con el padrón y el barrio del cliente en `clientes.json`.

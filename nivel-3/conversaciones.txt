@@ -1,0 +1,56 @@
+14/11/2026, 08:40:17 - Lola (C301) [P3-001] M001: <audio adjunto: audios/nota-01.mp3>
+14/11/2026, 08:40:34 - Guille (C302) [P3-002] M002: <audio adjunto: audios/nota-02.mp3>
+14/11/2026, 08:41:00 - Meli (C303) [P3-003] M003: <audio adjunto: audios/nota-03.mp3>
+14/11/2026, 08:41:17 - Seba (C304) [P3-004] M004: <audio adjunto: audios/nota-04.mp3>
+14/11/2026, 08:41:34 - Nati (C305) [P3-005] M005: <audio adjunto: audios/nota-05.mp3>
+14/11/2026, 08:42:00 - Hugo (C306) [P3-006] M006: <audio adjunto: audios/nota-06.mp3>
+14/11/2026, 08:42:17 - Romi (C307) [P3-007] M007: <audio adjunto: audios/nota-07.mp3>
+14/11/2026, 08:42:34 - Dami (C308) [P3-008] M008: <audio adjunto: audios/nota-08.mp3>
+14/11/2026, 08:43:00 - Vero (C309) [P3-009] M009: <audio adjunto: audios/nota-09.mp3>
+14/11/2026, 08:43:17 - Juani (C310) [P3-010] M010: <audio adjunto: audios/nota-10.mp3>
+14/11/2026, 08:43:34 - Sol (C311) [P3-011] M011: <audio adjunto: audios/nota-11.mp3>
+14/11/2026, 08:44:00 - Caro (C312) [P3-012] M012: <audio adjunto: audios/nota-12.mp3>
+14/11/2026, 08:44:17 - Pili (C313) [P3-013] M013: <audio adjunto: audios/nota-13.mp3>
+14/11/2026, 08:44:34 - Marce (C314) [P3-014] M014: <audio adjunto: audios/nota-14.mp3>
+14/11/2026, 08:45:00 - Luz (C315) [P3-015] M015: <audio adjunto: audios/nota-15.mp3>
+14/11/2026, 08:45:17 - Fabi (C316) [P3-016] M016: <audio adjunto: audios/nota-16.mp3>
+14/11/2026, 08:45:34 - Eva (C317) [P3-017] M017: <audio adjunto: audios/nota-17.mp3>
+14/11/2026, 08:46:00 - Nacho (C318) [P3-018] M018: <audio adjunto: audios/nota-18.mp3>
+14/11/2026, 08:46:17 - Dora (C319) [P3-019] M019: <audio adjunto: audios/nota-19.mp3>
+14/11/2026, 08:46:34 - Tino (C320) [P3-020] M020: <audio adjunto: audios/nota-20.mp3>
+14/11/2026, 08:47:00 - Belu (C321) [P3-021] M021: Te mando lo que anoté. Las bananas son tres kilos, el signo era para preguntarme si quedaban en casa; ya miré. <foto adjunta: fotos/lista-01.jpg>
+14/11/2026, 08:47:17 - Susi (C322) [P3-022] M022: Foto del papel de la cocina. Papas: tres bolsas de cinco, aunque el número me salió cerrado. El resto como está escrito. <foto adjunta: fotos/lista-02.jpg>
+14/11/2026, 08:47:34 - Pepa (C323) [P3-023] M023: Encontré un ticket para anotar. Después te confirmo si consigo el espacio en la heladera. <foto adjunta: fotos/lista-03.jpg>
+14/11/2026, 08:48:00 - Iván (C324) [P3-024] M024: La compra de hoy, te paso la nota que dejé pegada. <foto adjunta: fotos/lista-04.jpg>
+14/11/2026, 08:48:17 - Ari (C325) [P3-025] M025: va foto. banana: cuatro kilos, no piezas. abajo está la dirección. <foto adjunta: fotos/lista-05.jpg>
+14/11/2026, 08:48:34 - Clau (C326) [P3-026] M026: Buenas, lo dejé escrito en el cartón. Donde dice 2/3 de batata: son dos bolsas de cinco, descartá el tres. <foto adjunta: fotos/lista-06.jpg>
+14/11/2026, 08:49:00 - Mauro (C327) [P3-027] M027: Mauro
+Valdoria 2810
+3 cajones de tomate redondo
+me encuentran desde 10:20 hasta 14:05. el perro ladra pero no sale
+14/11/2026, 08:49:17 - Vicky (C328) [P3-028] M028: necesito 8 bolsas de 5 kilos de papa blanca p hoy. Wenarpa 2010. abro diez menos cuarto? perdón, DIEZ Y CUARENTA Y CINCO. cierro 14:50
+14/11/2026, 08:49:34 - Alma (C329) [P3-029] M029: Hoy 8 bolsas de 5 kilos de papa blanca. Desde las 10 y cuarto hasta las 14 en Valdoria 2610. Recibe Alma.
+14/11/2026, 08:50:00 - Leo (C330) [P3-030] M030: para reponer: 8 bolsas de 5 kilos de papa blanca; la puerta de Serralvia 3110. horario 10.35 / 14.35. gracias!
+14/11/2026, 08:50:17 - Fran (C331) [P3-031] M031: Buen día! a las 10:30 ya estoy y a las 14:15 bajo la persiana. 7 bolsas de 5 kilos de papa blanca y 1 bolsa de 5 kilos de batata, en Wendarpa 2710. Fran
+14/11/2026, 08:50:34 - Cata (C332) [P3-032] M032: Hola, paso compra para Umbralia 2010:
+8 bolsas de 5 kilos de papa blanca
+desde cinco pasadas las diez hasta cinco para las tres. tocar abajo
+14/11/2026, 08:51:00 - Bruno (C333) [P3-033] M033: 2 cajones de tomate redondo. recibimos 10.25 a 14.20 en Wendarpa 2310; después tengo gente y no puedo abrir.
+14/11/2026, 08:51:17 - Inés (C334) [P3-034] M034: pedido de Inés: 6 bolsas de 5 kilos de papa blanca y 2 bolsas de 5 kilos de batata. dirección Yerralma 1910. De diez de la mañana a dos y cuarenta de la tarde, cualquier momento.
+14/11/2026, 08:51:34 - Omar (C335) [P3-035] M035: hoy 2 cajones de tomate redondo; entregan? calle Rieluma, nro 2210. 10:15 abre el portón, 14:50 se cierra
+14/11/2026, 08:52:00 - Elisa (C336) [P3-036] M036: Para Wenarpa 2510 necesito 8 bolsas de 5 kilos de papa blanca. De 10 y 40 a 14 y 10. Voy a dejar el teléfono cargando; llamen al timbre.
+14/11/2026, 08:52:17 - Amalia (C337) [P3-037] M037: dejenme 5 bolsas de 5 kilos de papa blanca y 3 bolsas de 5 kilos de batata. Xiloria 2710. estoy de diez y cuarto hasta las tres menos cuarto. Amalia
+14/11/2026, 08:52:34 - Julia (C338) [P3-038] M038: Julia acá, para el local: 8 bolsas de 5 kilos de papa blanca. Wendarpa 1810. Por ahora puse de 12:00 a 14:00.
+14/11/2026, 08:53:00 - Valen (C339) [P3-039] M039: Pedido sábado: 4 bolsas de 5 kilos de papa blanca y 4 bolsas de 5 kilos de batata. Lugar Umbralia 3110. Diez y diez a dos menos cinco. Avisen al llegar.
+14/11/2026, 08:53:17 - Rosa (C340) [P3-040] M040: Buenasss
+3 bolsas de 5 kilos de papa blanca y 5 bolsas de 5 kilos de batata
+Serralbia 2610
+Desde las 10 hasta las 14.25. gracias Rosa
+14/11/2026, 09:13:00 - Meli (C303) [P3-003] M103: Me sobró de ayer: dejá 2 bolsas de 5 kilos de batata. Mantené lo demás.
+14/11/2026, 09:18:00 - Dami (C308) [P3-008] M108: Ese domicilio ya no lo uso. Ahora es Valdoria 3410; la compra queda igual.
+14/11/2026, 09:22:00 - Caro (C312) [P3-012] M112: Se cambió la reunión, puedo recibir desde 10:10 hasta 11:45. Lo otro que puse no va.
+14/11/2026, 09:27:00 - Eva (C317) [P3-017] M117: Bajame el pedido: 2 cajones de tomate redondo, el resto sí.
+14/11/2026, 09:33:00 - Pepa (C323) [P3-023] M123: me confundí de verdura, no quiero zanahoria. cambialo por dos cajones de tomate redondo. resto igual
+14/11/2026, 09:37:00 - Mauro (C327) [P3-027] M127: Corregí lo primero que anoté, era 2 cajones de tomate redondo. Los otros productos quedan.
+14/11/2026, 09:43:00 - Bruno (C333) [P3-033] M133: Me mezclaste los locales o te lo escribí mal: mandá a Wendarpa 2210. Mismo pedido.
+14/11/2026, 09:48:00 - Julia (C338) [P3-038] M138: Actualizo: de 10:05 a 14:35 hay alguien. Dejá este horario anotado.

@@ -1,0 +1,185 @@
+{
+  "rutas": [
+    {
+      "vehiculo": "V1",
+      "salida": "10:19:06",
+      "paradas": [
+        {
+          "pedido": "P3-027",
+          "inicio": "10:20:03"
+        },
+        {
+          "pedido": "P3-015",
+          "inicio": "10:33:12"
+        },
+        {
+          "pedido": "P3-040",
+          "inicio": "10:36:28"
+        },
+        {
+          "pedido": "P3-010",
+          "inicio": "10:49:15"
+        },
+        {
+          "pedido": "P3-012",
+          "inicio": "10:52:47"
+        },
+        {
+          "pedido": "P3-030",
+          "inicio": "10:56:16"
+        },
+        {
+          "pedido": "P3-016",
+          "inicio": "11:08:29"
+        },
+        {
+          "pedido": "P3-006",
+          "inicio": "11:12:00"
+        },
+        {
+          "pedido": "P3-004",
+          "inicio": "11:16:55"
+        },
+        {
+          "pedido": "P3-025",
+          "inicio": "11:23:26"
+        },
+        {
+          "pedido": "P3-021",
+          "inicio": "11:36:13"
+        },
+        {
+          "pedido": "P3-035",
+          "inicio": "11:49:17"
+        },
+        {
+          "pedido": "P3-026",
+          "inicio": "12:02:36"
+        }
+      ],
+      "regreso": "12:15:02"
+    },
+    {
+      "vehiculo": "V2",
+      "salida": "10:21:25",
+      "paradas": [
+        {
+          "pedido": "P3-009",
+          "inicio": "10:22:42"
+        },
+        {
+          "pedido": "P3-033",
+          "inicio": "10:25:59"
+        },
+        {
+          "pedido": "P3-002",
+          "inicio": "10:38:30"
+        },
+        {
+          "pedido": "P3-034",
+          "inicio": "10:42:14"
+        },
+        {
+          "pedido": "P3-019",
+          "inicio": "10:54:14"
+        },
+        {
+          "pedido": "P3-011",
+          "inicio": "11:07:00"
+        },
+        {
+          "pedido": "P3-013",
+          "inicio": "11:10:43"
+        },
+        {
+          "pedido": "P3-023",
+          "inicio": "12:00:00"
+        },
+        {
+          "pedido": "P3-028",
+          "inicio": "12:12:56"
+        },
+        {
+          "pedido": "P3-038",
+          "inicio": "12:25:28"
+        },
+        {
+          "pedido": "P3-032",
+          "inicio": "12:38:28"
+        }
+      ],
+      "regreso": "12:51:42"
+    },
+    {
+      "vehiculo": "V3",
+      "salida": "10:15:43",
+      "paradas": [
+        {
+          "pedido": "P3-024",
+          "inicio": "10:16:46"
+        },
+        {
+          "pedido": "P3-039",
+          "inicio": "10:28:46"
+        },
+        {
+          "pedido": "P3-008",
+          "inicio": "10:41:58"
+        },
+        {
+          "pedido": "P3-001",
+          "inicio": "10:46:16"
+        },
+        {
+          "pedido": "P3-020",
+          "inicio": "10:49:48"
+        },
+        {
+          "pedido": "P3-014",
+          "inicio": "11:02:39"
+        },
+        {
+          "pedido": "P3-003",
+          "inicio": "11:07:00"
+        },
+        {
+          "pedido": "P3-005",
+          "inicio": "11:10:17"
+        },
+        {
+          "pedido": "P3-037",
+          "inicio": "11:14:07"
+        },
+        {
+          "pedido": "P3-022",
+          "inicio": "11:26:07"
+        },
+        {
+          "pedido": "P3-007",
+          "inicio": "11:38:43"
+        },
+        {
+          "pedido": "P3-031",
+          "inicio": "11:41:59"
+        },
+        {
+          "pedido": "P3-018",
+          "inicio": "11:53:59"
+        },
+        {
+          "pedido": "P3-036",
+          "inicio": "12:06:33"
+        },
+        {
+          "pedido": "P3-029",
+          "inicio": "12:19:15"
+        },
+        {
+          "pedido": "P3-017",
+          "inicio": "12:31:15"
+        }
+      ],
+      "regreso": "12:43:30"
+    }
+  ]
+}

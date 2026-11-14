@@ -1,0 +1,9 @@
+# Créditos
+
+Las voces son sintéticas, generadas localmente con [Piper](https://github.com/OHF-Voice/piper1-gpl). Se usaron los modelos es_AR-daniela-high, es_ES-sharvard-medium (dos hablantes) y es_MX-ald-medium de [Piper Voices](https://huggingface.co/rhasspy/piper-voices/tree/e7229f7d33a10e145e109b886d661984201ac3c4).
+
+Daniela, entrenada por [larcanio](https://huggingface.co/larcanio/piper-voices), usa [OpenSLR 61](https://www.openslr.org/61/), copyright 2018–2019 Google, bajo [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Sharvard usa el [conjunto Spanish Harvard](https://datashare.ed.ac.uk/handle/10283/574), bajo [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). Ald usa el [conjunto Ald Mexican Spanish de rmcpantoja](https://huggingface.co/datasets/rmcpantoja/Ald_Mexican_Spanish_speech_dataset), publicado con Unlicense. Las fichas originales acompañan las fuentes de producción de la organización.
+
+La síntesis se mezcló con ruido generado y se procesó en volumen, velocidad y filtrado. Las adaptaciones de audio de La Palanca se distribuyen bajo CC BY-SA 4.0, con los créditos anteriores. Las voces no representan a los participantes ni a los clientes de un comercio real.
+
+Las listas se generaron como imágenes con las fuentes [Kalam](https://fonts.google.com/specimen/Kalam) , [Caveat](https://fonts.google.com/specimen/Caveat), [Patrick Hand](https://fonts.google.com/specimen/Patrick+Hand), [Architects Daughter](https://fonts.google.com/specimen/Architects+Daughter), [Handlee](https://fonts.google.com/specimen/Handlee) y [Shadows Into Light](https://fonts.google.com/specimen/Shadows+Into+Light), disponibles bajo SIL Open Font License. El papel, la textura, las sombras y la escritura son sintéticos. Todos los nombres, comercios, domicilios, mapas y pagos de esta prueba son ficticios.

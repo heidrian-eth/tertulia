@@ -18,4 +18,4 @@ Entregas del equipo **Las Hipotenusas** para el challenge **Arquímedes** de [te
 | 2 | Rutas de reparto sobre el mapa: ruteo con capacidad y franjas horarias para 80 pedidos y 3 camionetas | [`nivel-2/rutas.json`](nivel-2/rutas.json), [`nivel-2/codigo/`](nivel-2/codigo/) |
 | 3 | Pedidos desde audios, fotos y mensajes con correcciones, y sus rutas | [`nivel-3/pedidos.json`](nivel-3/pedidos.json), [`nivel-3/rutas.json`](nivel-3/rutas.json), [`nivel-3/codigo/`](nivel-3/codigo/) |
 
-Cada carpeta conserva los datos recibidos y el enunciado del nivel (`enunciado.md`). El código de los niveles 2 y 3 tiene su propio README con instrucciones de uso, y el nivel 3 incluye un [visor de rutas](nivel-3/visor/) sobre el plano.
+Cada carpeta conserva los datos recibidos y el enunciado del nivel (`enunciado.md`). El código de los niveles 2 y 3 tiene su propio README con instrucciones de uso, y cada uno incluye un visor de rutas sobre el plano: [nivel 2](nivel-2/visor/) y [nivel 3](nivel-3/visor/).

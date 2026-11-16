@@ -4,11 +4,11 @@ Entregas del equipo **Las Hipotenusas** para el challenge **Arquímedes** de [te
 
 ## Equipo
 
-- [Adrian Mazza](https://www.linkedin.com/in/adrian-h-mazza/)
-- [Daniel Gallardo](https://www.linkedin.com/in/daniel-gallardo-10796633/)
-- [Verena Tononi](https://www.linkedin.com/in/psi-verena-tononi-392b56444/)
-- [Bryan Casares](https://www.linkedin.com/in/bryancasares/)
-- [Analia Ruiz](https://www.linkedin.com/in/analia-ruiz/)
+- [Adrian Mazza](https://www.linkedin.com/in/adrian-h-mazza/): ingeniero electrónico, dedicado a ingeniería y consultoría en IA.
+- [Daniel Gallardo](https://www.linkedin.com/in/daniel-gallardo-10796633/): MBA por la Guanghua School of Management de Peking University.
+- [Verena Tononi](https://www.linkedin.com/in/psi-verena-tononi-392b56444/): psicóloga y terapeuta integrativa; co-directora y docente del Posgrado en Psiconeuroinmunoendocrinología Clínica (UNR).
+- [Bryan Casares](https://www.linkedin.com/in/bryancasares/): ingeniero mecánico, emprendiendo en supercoco.com.ar.
+- [Analia Ruiz](https://www.linkedin.com/in/analia-ruiz/): analista funcional y de procesos de negocio, con experiencia en programación, CMS y gestión de proyectos.
 
 ## Niveles
 
